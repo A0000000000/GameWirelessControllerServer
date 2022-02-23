@@ -63,12 +63,27 @@ namespace GameWirelessControllerServer
         {
             ListenerThread = new Thread(() =>
             {
-                Listener.Start();
+                try
+                {
+                    Listener.Start();
+                }
+                catch (Exception e) 
+                {
+                    if (OnListenerQuit != null)
+                    {
+                        OnListenerQuit();
+                    }
+                    return;
+                }
                 while (true)
                 {
                     try
                     {
                         Client = Listener.AcceptBluetoothClient();
+                        if (OnDeviceConnected != null)
+                        {
+                            OnDeviceConnected();
+                        }
                         try
                         {
                             Stream = Client.GetStream();
@@ -85,34 +100,67 @@ namespace GameWirelessControllerServer
                                 size |= len[3];
                                 byte[] data = new byte[size];
                                 Stream.Read(data, 0, size);
+                                Write("SUCCESS");
                                 string str = Encoding.UTF8.GetString(data).ToString();
+                                if (str == "DISCONNECT")
+                                {
+                                    break;
+                                }
                                 if (OnDataReady != null)
                                 {
                                     OnDataReady(str);
                                 }
-                                Write("SUCCESS");
                             }
                         }
-                        catch (Exception ignore) { }
+                        catch (Exception e) 
+                        {
+                            break;
+                        }
                         finally
                         {
+                            try
+                            {
+                                Stream?.Close();
+                                Client?.Close();
+                            }
+                            catch (Exception ignore) { }
                             Stream = null;
                             Client = null;
+                            if (OnListenerQuit != null)
+                            {
+                                OnListenerQuit();
+                            }
                         }
-
                     }
                     catch (Exception e)
                     {
-                        // MessageBox.Show($"出现错误, 原因: {e.Message}");
                         break;
                     }
-                }
-                if (OnListenerQuit != null)
-                {
-                    OnListenerQuit();
+                    finally
+                    {
+                        try
+                        {
+                            Stream?.Close();
+                            Client?.Close();
+                        }
+                        catch (Exception ignore) { }
+                        Stream = null;
+                        Client = null;
+                        ListenerThread = null;
+                        if (OnListenerQuit != null)
+                        {
+                            OnListenerQuit();
+                        }
+                    }
                 }
             });
             ListenerThread.Start();
+        }
+
+        public Action OnDeviceConnected
+        {
+            get;
+            set;
         }
 
         public Action OnListenerQuit
@@ -158,10 +206,10 @@ namespace GameWirelessControllerServer
         {
             try
             {
-                Listener.Stop();
-                ListenerThread.Abort();
-                Stream.Close();
-                Client.Dispose();
+                Listener?.Stop();
+                ListenerThread?.Abort();
+                Stream?.Close();
+                Client?.Dispose();
             }
             catch(Exception e)
             {

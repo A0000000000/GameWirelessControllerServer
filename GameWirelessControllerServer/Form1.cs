@@ -15,48 +15,51 @@ namespace GameWirelessControllerServer
 
         private BluetoothServerController Controller = BluetoothServerController.GetInstance();
 
-        public int buttonFlag = 2;
+        public bool buttonFlag = true;
         public FormMain()
         {
             InitializeComponent();
+            Controller.OnDeviceConnected = () =>
+            {
+                string name = Controller.getDeviceName();
+                string address = Controller.getDeviceAddress();
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    label_name.Text = name;
+                    label_address.Text = address;
+                }));
+            };
+            Controller.OnListenerQuit = () =>
+            {
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    label_name.Text = "No Name";
+                    label_address.Text = "No Address";
+                    label_event.Text = "No Event";
+                }));
+            };
+            Controller.OnDataReady = data =>
+            {
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    label_event.Text = data;
+                }));
+            };
         }
 
         private void btnStartListener_Click(object sender, EventArgs e)
         {
-            if (buttonFlag >= 2)
+            if (buttonFlag)
             {
-                buttonFlag--;
+                buttonFlag = false;
                 btnStartListener.Text = "停止监听";
                 label3.Text = "状态: 已启动";
-                Controller.OnDataReady = data =>
-                {
-                    BeginInvoke(new MethodInvoker(() =>
-                    {
-                        if (buttonFlag >= 1)
-                        {
-                            buttonFlag--;
-                            label_name.Text = Controller.getDeviceName();
-                            label_address.Text = Controller.getDeviceAddress();
-                        }
-                        label_event.Text = data;
-                    }));
-                    
-                };
-                Controller.OnListenerQuit = () =>
-                {
-                    BeginInvoke(new MethodInvoker(() =>
-                    {
-                        buttonFlag = 2;
-                        btnStartListener.Text = "开始监听";
-                        label3.Text = "状态: 未启动";
-                    }));
-                };
                 Controller.StartListener();
             }
             else 
             {
                 Controller.Dispose();
-                buttonFlag = 2;
+                buttonFlag = true;
                 btnStartListener.Text = "开始监听";
                 label3.Text = "状态: 未启动";
                 label_name.Text = "No Name";
