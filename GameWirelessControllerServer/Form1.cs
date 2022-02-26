@@ -33,18 +33,41 @@ namespace GameWirelessControllerServer
             {
                 BeginInvoke(new MethodInvoker(() =>
                 {
-                    label_name.Text = "No Name";
-                    label_address.Text = "No Address";
-                    label_event.Text = "No Event";
+                    buttonFlag = true;
+                    btnStartListener.Text = "开始监听";
+                    label3.Text = "状态: 未启动";
+                    Reset();
                 }));
             };
+            Controller.Ondisconnect = Reset;
             Controller.OnDataReady = data =>
             {
+                TransferObject obj = TransferObject.FromJson(Encoding.UTF8.GetString(data));
+                if (obj?.Message == "DISCONNECT")
+                {
+                    Controller.CloseConnect();
+                    Reset();
+                    return;
+                }
+                else
+                {
+                    SendData(new TransferObject(new Dictionary<string, object>(), 0, "SUCCESS"));
+                }
                 BeginInvoke(new MethodInvoker(() =>
                 {
-                    label_event.Text = data;
+                    label_event.Text = obj.ToString();
                 }));
             };
+        }
+
+        private void Reset()
+        {
+            BeginInvoke(new MethodInvoker(() =>
+            {
+                label_name.Text = "No Name";
+                label_address.Text = "No Address";
+                label_event.Text = "No Event";
+            }));
         }
 
         private void btnStartListener_Click(object sender, EventArgs e)
@@ -62,10 +85,25 @@ namespace GameWirelessControllerServer
                 buttonFlag = true;
                 btnStartListener.Text = "开始监听";
                 label3.Text = "状态: 未启动";
-                label_name.Text = "No Name";
-                label_address.Text = "No Address";
-                label_event.Text = "No Event";
+                Reset();
             }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SendData(new TransferObject(new Dictionary<string, object>(), 0, "DISCONNECT"));
+        }
+
+
+        private void SendData(TransferObject obj)
+        {
+            Controller?.Write(Encoding.UTF8.GetBytes(obj.ToJson()));
+        }
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Controller.Dispose();
+            Application.Exit();
         }
     }
 }

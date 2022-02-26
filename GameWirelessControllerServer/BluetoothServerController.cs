@@ -59,6 +59,7 @@ namespace GameWirelessControllerServer
             set;
         }
 
+
         public void StartListener()
         {
             ListenerThread = new Thread(() =>
@@ -87,7 +88,7 @@ namespace GameWirelessControllerServer
                         try
                         {
                             Stream = Client.GetStream();
-                            while (Client.Connected)
+                            while (Client != null && Client.Connected)
                             {
                                 byte[] len = new byte[4];
                                 int size = 0;
@@ -100,58 +101,37 @@ namespace GameWirelessControllerServer
                                 size |= len[3];
                                 byte[] data = new byte[size];
                                 Stream.Read(data, 0, size);
-                                Write("SUCCESS");
-                                string str = Encoding.UTF8.GetString(data).ToString();
-                                if (str == "DISCONNECT")
-                                {
-                                    break;
-                                }
                                 if (OnDataReady != null)
                                 {
-                                    OnDataReady(str);
+                                    OnDataReady(data);
                                 }
                             }
                         }
                         catch (Exception e) 
                         {
-                            break;
                         }
                         finally
                         {
                             try
                             {
-                                Stream?.Close();
-                                Client?.Close();
+                                CloseConnect();
                             }
                             catch (Exception ignore) { }
-                            Stream = null;
-                            Client = null;
-                            if (OnListenerQuit != null)
-                            {
-                                OnListenerQuit();
-                            }
                         }
                     }
                     catch (Exception e)
                     {
                         break;
                     }
-                    finally
-                    {
-                        try
-                        {
-                            Stream?.Close();
-                            Client?.Close();
-                        }
-                        catch (Exception ignore) { }
-                        Stream = null;
-                        Client = null;
-                        ListenerThread = null;
-                        if (OnListenerQuit != null)
-                        {
-                            OnListenerQuit();
-                        }
-                    }
+                }
+                try
+                {
+                    Dispose();
+                }
+                catch (Exception ignore) { }
+                if (OnListenerQuit != null)
+                {
+                    OnListenerQuit();
                 }
             });
             ListenerThread.Start();
@@ -169,14 +149,19 @@ namespace GameWirelessControllerServer
             set;
         }
 
-        public Action<string> OnDataReady;
-
-
-        public void Write(string data)
+        public Action Ondisconnect
         {
-            if (data != null && Stream != null)
+            get;
+            set;
+        }
+
+        public Action<byte[]> OnDataReady;
+
+
+        public void Write(byte[] send)
+        {
+            if (send != null && Stream != null)
             {
-                byte[] send = Encoding.UTF8.GetBytes(data);
                 byte[] len =  { (byte)(send.Length >> 24), (byte)(send.Length >> 16), (byte)(send.Length >> 8), (byte)(send.Length) };
                 Stream.Write(len, 0, 4);
                 Stream.Write(send, 0, send.Length);
@@ -202,14 +187,35 @@ namespace GameWirelessControllerServer
             return "No Address";
         }
 
+        public void CloseConnect()
+        {
+            try
+            {
+                if (Ondisconnect != null)
+                {
+                    Ondisconnect();
+                }
+                Stream?.Close();
+                Client?.Dispose();
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                Stream = null;
+                Client = null;
+            }
+        }
+
         public void Dispose()
         {
             try
             {
+                CloseConnect();
                 Listener?.Stop();
                 ListenerThread?.Abort();
-                Stream?.Close();
-                Client?.Dispose();
             }
             catch(Exception e)
             {
@@ -218,8 +224,6 @@ namespace GameWirelessControllerServer
             finally
             {
                 ListenerThread = null;
-                Stream = null;
-                Client = null;
             }
         }
 

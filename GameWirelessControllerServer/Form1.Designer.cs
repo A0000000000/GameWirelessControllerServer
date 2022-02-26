@@ -32,6 +32,7 @@ namespace GameWirelessControllerServer
             this.btnStartListener = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_event = new System.Windows.Forms.Label();
             this.label_address = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@ namespace GameWirelessControllerServer
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label_event = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,14 @@ namespace GameWirelessControllerServer
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(275, 371);
             this.panel1.TabIndex = 2;
+            // 
+            // label_event
+            // 
+            this.label_event.Location = new System.Drawing.Point(51, 169);
+            this.label_event.Name = "label_event";
+            this.label_event.Size = new System.Drawing.Size(174, 138);
+            this.label_event.TabIndex = 9;
+            this.label_event.Text = "No Event";
             // 
             // label_address
             // 
@@ -172,14 +180,6 @@ namespace GameWirelessControllerServer
             this.label2.TabIndex = 0;
             this.label2.Text = "驱动服务";
             // 
-            // label_event
-            // 
-            this.label_event.Location = new System.Drawing.Point(51, 169);
-            this.label_event.Name = "label_event";
-            this.label_event.Size = new System.Drawing.Size(174, 138);
-            this.label_event.TabIndex = 9;
-            this.label_event.Text = "No Event";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -190,6 +190,8 @@ namespace GameWirelessControllerServer
             this.Controls.Add(this.labelTitle);
             this.Name = "FormMain";
             this.Text = "Game Wireless Controller Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
