@@ -42,13 +42,11 @@ namespace GameWirelessControllerServer
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lbDllVer = new System.Windows.Forms.Label();
-            this.lbDriverVer = new System.Windows.Forms.Label();
+            this.btnResetEvent = new System.Windows.Forms.Button();
             this.lbProduct = new System.Windows.Forms.Label();
             this.lbManufacturer = new System.Windows.Forms.Label();
             this.btnInitDriver = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnResetEvent = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -172,8 +170,6 @@ namespace GameWirelessControllerServer
             // panel2
             // 
             this.panel2.Controls.Add(this.btnResetEvent);
-            this.panel2.Controls.Add(this.lbDllVer);
-            this.panel2.Controls.Add(this.lbDriverVer);
             this.panel2.Controls.Add(this.lbProduct);
             this.panel2.Controls.Add(this.lbManufacturer);
             this.panel2.Controls.Add(this.btnInitDriver);
@@ -183,23 +179,16 @@ namespace GameWirelessControllerServer
             this.panel2.Size = new System.Drawing.Size(280, 371);
             this.panel2.TabIndex = 3;
             // 
-            // lbDllVer
+            // btnResetEvent
             // 
-            this.lbDllVer.AutoSize = true;
-            this.lbDllVer.Location = new System.Drawing.Point(41, 141);
-            this.lbDllVer.Name = "lbDllVer";
-            this.lbDllVer.Size = new System.Drawing.Size(77, 12);
-            this.lbDllVer.TabIndex = 5;
-            this.lbDllVer.Text = "库版本: null";
-            // 
-            // lbDriverVer
-            // 
-            this.lbDriverVer.AutoSize = true;
-            this.lbDriverVer.Location = new System.Drawing.Point(41, 115);
-            this.lbDriverVer.Name = "lbDriverVer";
-            this.lbDriverVer.Size = new System.Drawing.Size(89, 12);
-            this.lbDriverVer.TabIndex = 4;
-            this.lbDriverVer.Text = "驱动版本: null";
+            this.btnResetEvent.Enabled = false;
+            this.btnResetEvent.Location = new System.Drawing.Point(54, 328);
+            this.btnResetEvent.Name = "btnResetEvent";
+            this.btnResetEvent.Size = new System.Drawing.Size(91, 38);
+            this.btnResetEvent.TabIndex = 6;
+            this.btnResetEvent.Text = "重置事件";
+            this.btnResetEvent.UseVisualStyleBackColor = true;
+            this.btnResetEvent.Click += new System.EventHandler(this.btnResetEvent_Click);
             // 
             // lbProduct
             // 
@@ -237,17 +226,6 @@ namespace GameWirelessControllerServer
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
             this.label2.Text = "驱动服务";
-            // 
-            // btnResetEvent
-            // 
-            this.btnResetEvent.Enabled = false;
-            this.btnResetEvent.Location = new System.Drawing.Point(54, 328);
-            this.btnResetEvent.Name = "btnResetEvent";
-            this.btnResetEvent.Size = new System.Drawing.Size(91, 38);
-            this.btnResetEvent.TabIndex = 6;
-            this.btnResetEvent.Text = "重置事件";
-            this.btnResetEvent.UseVisualStyleBackColor = true;
-            this.btnResetEvent.Click += new System.EventHandler(this.btnResetEvent_Click);
             // 
             // FormMain
             // 
@@ -287,8 +265,6 @@ namespace GameWirelessControllerServer
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.Label label_event;
         private System.Windows.Forms.Button btnInitDriver;
-        private System.Windows.Forms.Label lbDllVer;
-        private System.Windows.Forms.Label lbDriverVer;
         private System.Windows.Forms.Label lbProduct;
         private System.Windows.Forms.Label lbManufacturer;
         private System.Windows.Forms.Button btnResetEvent;

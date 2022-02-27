@@ -1,9 +1,7 @@
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.exe.config
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.exe
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.pdb
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\InTheHand.Net.Bluetooth.dll
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\InTheHand.Net.Bluetooth.xml
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.AssemblyReference.cache
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.FormMain.resources
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.Properties.Resources.resources
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.GenerateResource.cache
@@ -11,15 +9,6 @@ D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\G
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.CopyComplete
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.exe
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.pdb
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Buffers.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Memory.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Numerics.Vectors.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Encodings.Web.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Json.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Threading.Tasks.Extensions.dll
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.ValueTuple.dll
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Buffers.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Memory.xml
@@ -29,4 +18,5 @@ D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\S
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Json.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.ValueTuple.xml
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\vJoyInterfaceWrap.dll
+D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.Fody.CopyLocal.cache

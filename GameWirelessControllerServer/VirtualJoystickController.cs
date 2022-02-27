@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vJoyInterfaceWrap;
+
+using Nefarius.ViGEm.Client;
+using Nefarius.ViGEm.Client.Targets;
+using Nefarius.ViGEm.Client.Targets.Xbox360;
 
 namespace GameWirelessControllerServer
 {
-    class VirtualJoystickController
+    class VirtualJoystickController: IDisposable
     {
 
         private static VirtualJoystickController INSTANCE = null;
         private static readonly object LOCK = new object();
+        private static int ABS_MAX_ROCKER = 32767;
+        private static int ABS_MAX_TRIGGER = 255;
 
         public static VirtualJoystickController GetInstance()
         {
@@ -28,51 +33,22 @@ namespace GameWirelessControllerServer
             return INSTANCE;
         }
 
-        private vJoy joystick = new vJoy();
-        private readonly uint id = 1;
+        private ViGEmClient client;
+        IXbox360Controller controller;
+
 
         public void InitJoystick()
         {
-            joystick.AcquireVJD(id);
-            joystick.ResetVJD(id);
-            joystick.ResetVJD(id);
+            client = new ViGEmClient();
+            controller = client.CreateXbox360Controller();
+            controller.Connect();
         }
 
-        public bool Enable()
-        {
-            return joystick.vJoyEnabled();
-        }
 
-        public bool CheckConfiguration()
-        {
-            bool AxisX = joystick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_X);
-            bool AxisY = joystick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_Y);
-            bool AxisZ = joystick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_Z);
-            bool AxisRZ = joystick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_RZ);
-            bool AxisSL0 = joystick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_SL0);
-            int btnCount = joystick.GetVJDButtonNumber(id);
-            int discNum = joystick.GetVJDDiscPovNumber(id);
-            return true || AxisX && AxisY && AxisZ && AxisRZ && AxisSL0 && btnCount >= 10 && discNum >= 1;
-        }
-
-        public bool DriverMatch(ref uint dllVer, ref uint drvVer)
-        {
-            return joystick.DriverMatch(ref dllVer, ref drvVer);
-        }
-
-        public string GetvJoyManufacturer()
-        {
-            return joystick.GetvJoyManufacturerString();
-        }
-
-        public string GetvJoyProduct()
-        {
-            return joystick.GetvJoyProductString();
-        }
 
         public void ResetInput()
         {
-
+            
         }
 
         public void EventReciver(Dictionary<string, object> data)
@@ -134,105 +110,76 @@ namespace GameWirelessControllerServer
             }
             if (type == "click")
             {
-                uint keyCode = 0;
-                if (keyType == KeyType.LEFT_ROCKER)
+                switch(keyType)
                 {
-                    keyCode = 9;
-                }
-                if (keyType == KeyType.RIGHT_ROCKER)
-                {
-                    keyCode = 10;
-                }
-                if (keyCode == 0)
-                {
-                    return;
-                }
-                if (action == "DOWN")
-                {
-                    joystick.SetBtn(true, id, keyCode);
-                }
-                if (action == "UP")
-                {
-                    joystick.SetBtn(false, id, keyCode);
+                    case KeyType.LEFT_ROCKER:
+                        controller.SetButtonState(Xbox360Button.LeftThumb, action == "DOWN");
+                        break;
+                    case KeyType.RIGHT_ROCKER:
+                        controller.SetButtonState(Xbox360Button.RightThumb, action == "DOWN");
+                        break;
                 }
             }
             if (type == "move")
             {
                 int x = int.Parse(data["x"]?.ToString() ?? "0");
-                int y = -int.Parse(data["y"]?.ToString() ?? "0");
-                x = x + 65535;
-                x /= 4;
-                y = y + 65535;
-                y /= 4;
+                int y = int.Parse(data["y"]?.ToString() ?? "0");
+                x = ABS_MAX_ROCKER * x / 100;
+                y = ABS_MAX_ROCKER * y / 100;
                 if (action == "UP")
                 {
-                    x = 65535 / 4;
-                    y = 65535 / 4;
+                    x = 0;
+                    y = 0;
                 }
-                if (keyType == KeyType.LEFT_ROCKER)
+                switch (keyType)
                 {
-                    joystick.SetAxis(x, id, HID_USAGES.HID_USAGE_X);
-                    joystick.SetAxis(y, id, HID_USAGES.HID_USAGE_Y);
+                    case KeyType.LEFT_ROCKER:
+                        controller.SetAxisValue(Xbox360Axis.LeftThumbX, short.Parse(x.ToString()));
+                        controller.SetAxisValue(Xbox360Axis.LeftThumbY, short.Parse(y.ToString()));
+                        break;
+                    case KeyType.RIGHT_ROCKER:
+                        controller.SetAxisValue(Xbox360Axis.RightThumbX, short.Parse(x.ToString()));
+                        controller.SetAxisValue(Xbox360Axis.RightThumbY, short.Parse(y.ToString()));
+                        break;
                 }
-                if (keyType == KeyType.RIGHT_ROCKER)
-                {
-                    joystick.SetAxis(x, id, HID_USAGES.HID_USAGE_Z);
-                    joystick.SetAxis(y, id, HID_USAGES.HID_USAGE_RZ);
-                }
+
             }
         }
 
         public void DealCrossKey(KeyType type, string action)
         {
-            if (action == "MOVE")
+           switch(type)
             {
-                return;
-            }
-            if (action == "UP")
-            {
-                joystick.SetDiscPov(-1, id, 1);
-                return;
-            }
-            switch (type)
-            {
-                case KeyType.CROSS_TOP:
-                    joystick.SetDiscPov(0, id, 1);
-                    break;
                 case KeyType.CROSS_LEFT:
-                    joystick.SetDiscPov(3, id, 1);
+                    controller.SetButtonState(Xbox360Button.Left, action == "DOWN");
                     break;
                 case KeyType.CROSS_BOTTOM:
-                    joystick.SetDiscPov(2, id, 1);
+                    controller.SetButtonState(Xbox360Button.Down, action == "DOWN");
                     break;
                 case KeyType.CROSS_RIGHT:
-                    joystick.SetDiscPov(1, id, 1);
+                    controller.SetButtonState(Xbox360Button.Right, action == "DOWN");
                     break;
-                default:
-                    joystick.SetDiscPov(-1, id, 1);
+                case KeyType.CROSS_TOP:
+                    controller.SetButtonState(Xbox360Button.Up, action == "DOWN");
                     break;
             }
         }
 
         public void DealABXY(KeyType type, string action)
         {
-            if (action == "MOVE")
-            {
-                return;
-            }
-            bool down = (action != "UP");
-            switch(type)
+            switch (type)
             {
                 case KeyType.A:
-                    joystick.SetBtn(down, id, 1);
+                    controller.SetButtonState(Xbox360Button.A, action == "DOWN");
                     break;
                 case KeyType.B:
-                    joystick.SetBtn(down, id, 2);
+                    controller.SetButtonState(Xbox360Button.B, action == "DOWN");
                     break;
                 case KeyType.X:
-                    joystick.SetBtn(down, id, 3);
+                    controller.SetButtonState(Xbox360Button.X, action == "DOWN");
                     break;
                 case KeyType.Y:
-                    joystick.SetBtn(down, id, 4);
+                    controller.SetButtonState(Xbox360Button.Y, action == "DOWN");
                     break;
             }
         }
@@ -240,69 +187,60 @@ namespace GameWirelessControllerServer
         public void DealTrigger(KeyType type, string action, Dictionary<string, object> data)
         {
             int trigger = int.Parse(data["trigger"]?.ToString() ?? "0");
-            trigger = 32767  * trigger / 100;
+            trigger = ABS_MAX_TRIGGER * trigger / 100;
             if (action == "UP")
             {
-                trigger = 32767 / 2;
+                trigger = 0;
             }
-            else
+            switch (type)
             {
-                if (type == KeyType.LEFT_TRIGGER)
-                {
-                    trigger = 32767 / 2 + trigger;
-                }
-                if (type == KeyType.RIGHT_TRIGGER)
-                {
-                    trigger = 32767 / 2 - trigger;
-                }
+                case KeyType.LEFT_TRIGGER:
+                    controller.SetSliderValue(Xbox360Slider.LeftTrigger, byte.Parse(trigger.ToString()));
+                    break;
+                case KeyType.RIGHT_TRIGGER:
+                    controller.SetSliderValue(Xbox360Slider.RightTrigger, byte.Parse(trigger.ToString()));
+                    break;
             }
-            joystick.SetAxis(trigger, id, HID_USAGES.HID_USAGE_SL0);
 
         }
 
         public void DealButton(KeyType type, string action)
         {
-            if (action == "MOVE")
-            {
-                return;
-            }
-            bool down = (action != "UP");
-            switch(type)
+            switch (type)
             {
                 case KeyType.LEFT_BUTTON:
-                    joystick.SetBtn(down, id, 5);
+                    controller.SetButtonState(Xbox360Button.LeftShoulder, action == "DOWN");
                     break;
                 case KeyType.RIGHT_BUTTON:
-                    joystick.SetBtn(down, id, 6);
-                    break;
-                case KeyType.VIEW:
-                    joystick.SetBtn(down, id, 7);
+                    controller.SetButtonState(Xbox360Button.RightShoulder, action == "DOWN");
                     break;
                 case KeyType.MENU:
-                    joystick.SetBtn(down, id, 8);
+                    controller.SetButtonState(Xbox360Button.Start, action == "DOWN");
+                    break;
+                case KeyType.VIEW:
+                    controller.SetButtonState(Xbox360Button.Back, action == "DOWN");
                     break;
             }
-
         }
 
         public void DealAddition(KeyType type, string action)
         {
-            if (action == "MOVE")
-            {
-                return;
-            }
-            bool down = (action != "UP");
-            switch (type)
-            {
-                case KeyType.MAIN:
-                    joystick.SetBtn(down, id, 11);
-                    break;
-                case KeyType.FUNCTION:
-                    joystick.SetBtn(down, id, 12);
-                    break;
-            }
+           
         }
 
+        public void Dispose()
+        {
+            try
+            {
+                controller?.Disconnect();
+                client?.Dispose();
+            } catch(Exception e) {}
+            finally
+            {
+                controller = null;
+                client = null;
+            }
+        }
     }
 
     enum KeyType

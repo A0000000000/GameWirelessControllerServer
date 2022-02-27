@@ -25,6 +25,7 @@ namespace GameWirelessControllerServer
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             ConnectServerOnClosing();
+            DriverServiceOnClosing();
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -136,40 +137,43 @@ namespace GameWirelessControllerServer
         #region 驱动服务
 
         private VirtualJoystickController JoystickController = VirtualJoystickController.GetInstance();
+        private bool driverButtonFlag = true;
     
         private void InitDriverService()
         {
             lbManufacturer.Text = "厂商: null";
             lbProduct.Text = "产品: null";
-            lbDriverVer.Text = "驱动版本: null";
-            lbDllVer.Text = "库版本: null";
         }
 
         private void btnInitDriver_Click(object sender, EventArgs e)
         {
-            if (!JoystickController.Enable())
+            if (driverButtonFlag)
             {
-                MessageBox.Show("vJoy驱动未安装!");
-                return;
+                try
+                {
+                    JoystickController.InitJoystick();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("请先安装ViGEmBus！地址：https://github.com/ViGEm/ViGEmBus");
+                    return;
+                }
+                InitJoystickInformation();
+                btnInitDriver.Text = "卸载驱动.";
+                btnResetEvent.Enabled = true;
             }
-            if (!JoystickController.CheckConfiguration())
+            else
             {
-                MessageBox.Show("配置错误,请检查vJoy的配置！");
+                btnInitDriver.Text = "初始化驱动.";
+                JoystickController.Dispose();
+                btnResetEvent.Enabled = false;
             }
-            JoystickController.InitJoystick();
-            InitJoystickInformation();
-            btnInitDriver.Enabled = false;
-            btnResetEvent.Enabled = true;
+            driverButtonFlag = !driverButtonFlag;
         }
 
         private void InitJoystickInformation()
         {
-            lbManufacturer.Text = "厂商: " + JoystickController.GetvJoyManufacturer();
-            lbProduct.Text = "产品: " + JoystickController.GetvJoyProduct();
-            uint drvVer = 0, dllVer = 0;
-            JoystickController.DriverMatch(ref dllVer, ref drvVer);
-            lbDriverVer.Text = "驱动版本: " + drvVer;
-            lbDllVer.Text = "库版本: " + dllVer;
+            lbManufacturer.Text = "厂商: ViGEm";
+            lbProduct.Text = "产品: Xbox 360";
         }
 
         public void OnEventReciver(Dictionary<string, object> data)
@@ -180,6 +184,11 @@ namespace GameWirelessControllerServer
         private void btnResetEvent_Click(object sender, EventArgs e)
         {
             JoystickController.ResetInput();
+        }
+
+        private void DriverServiceOnClosing()
+        {
+            JoystickController.Dispose();
         }
 
         #endregion
