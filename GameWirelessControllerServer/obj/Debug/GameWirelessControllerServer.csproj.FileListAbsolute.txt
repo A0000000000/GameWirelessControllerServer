@@ -20,3 +20,4 @@ D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\S
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.ValueTuple.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.Fody.CopyLocal.cache
+D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.AssemblyReference.cache

@@ -59,17 +59,17 @@ namespace GameWirelessControllerServer
                     bluetoothBtnFlag = true;
                     btnStartListener.Text = "开始监听";
                     label3.Text = "状态: 未启动";
-                    Reset();
+                    ResetBluetoothServer();
                 }));
             };
-            BluetoothController.Ondisconnect = Reset;
+            BluetoothController.Ondisconnect = ResetBluetoothServer;
             BluetoothController.OnDataReady = data =>
             {
                 TransferObject obj = TransferObject.FromJson(Encoding.UTF8.GetString(data));
                 if (obj?.Message == "DISCONNECT")
                 {
                     BluetoothController.CloseConnect();
-                    Reset();
+                    ResetBluetoothServer();
                     return;
                 }
                 else
@@ -87,7 +87,7 @@ namespace GameWirelessControllerServer
             };
         }
 
-        private void Reset()
+        private void ResetBluetoothServer()
         {
             BeginInvoke(new MethodInvoker(() =>
             {
@@ -108,11 +108,12 @@ namespace GameWirelessControllerServer
             }
             else 
             {
+                ConnectServerOnClosing();
                 BluetoothController.Dispose();
                 bluetoothBtnFlag = true;
                 btnStartListener.Text = "开始监听";
                 label3.Text = "状态: 未启动";
-                Reset();
+                ResetBluetoothServer();
             }
         }
 
@@ -124,7 +125,11 @@ namespace GameWirelessControllerServer
 
         private void ConnectServerOnClosing()
         {
-            SendData(new TransferObject(new Dictionary<string, object>(), 0, "DISCONNECT"));
+            try
+            {
+                SendData(new TransferObject(new Dictionary<string, object>(), 0, "DISCONNECT"));
+            }
+            catch (Exception e) { }
         }
 
         private void ConnectServerOnClose()
