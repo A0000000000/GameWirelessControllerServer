@@ -15,7 +15,7 @@ namespace GameWirelessControllerServer
 
         public static readonly string GUID = "6ef82393-6cab-4749-b0b5-df0109fb7dec";
 
-        private static BluetoothServerController INSTANCE;
+        private static BluetoothServerController INSTANCE = null;
 
         private static readonly object LOCK = new object();
 
@@ -88,7 +88,7 @@ namespace GameWirelessControllerServer
                         try
                         {
                             Stream = Client.GetStream();
-                            while (Client != null && Client.Connected)
+                            while (Client?.Connected ?? false)
                             {
                                 byte[] len = new byte[4];
                                 int size = 0;

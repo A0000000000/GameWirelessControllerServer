@@ -29,3 +29,4 @@ D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\S
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Json.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.ValueTuple.xml
+D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\vJoyInterfaceWrap.dll
