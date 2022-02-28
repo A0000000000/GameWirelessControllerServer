@@ -183,7 +183,11 @@ namespace GameWirelessControllerServer
 
         public void OnEventReciver(Dictionary<string, object> data)
         {
-            JoystickController.EventReciver(data ?? new Dictionary<string, object>());
+            try
+            {
+                JoystickController.EventReciver(data ?? new Dictionary<string, object>());
+            }
+            catch (Exception e) { }
         }
 
         private void btnResetEvent_Click(object sender, EventArgs e)
