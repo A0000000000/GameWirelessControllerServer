@@ -1,0 +1,11 @@
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\GameControllerServiceClient.pdb
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\Nefarius.ViGEm.Client.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.AssemblyReference.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.AssemblyInfoInputs.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.AssemblyInfo.cs
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.CoreCompileInputs.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.CopyComplete
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.pdb

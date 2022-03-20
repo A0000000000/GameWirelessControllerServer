@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "GameControllerServiceClient/1.0.0": {
+        "dependencies": {
+          "Nefarius.ViGEm.Client": "1.17.178"
+        },
+        "runtime": {
+          "GameControllerServiceClient.dll": {}
+        }
+      },
+      "Nefarius.ViGEm.Client/1.17.178": {
+        "runtime": {
+          "lib/netcoreapp2.2/Nefarius.ViGEm.Client.dll": {
+            "assemblyVersion": "1.17.178.0",
+            "fileVersion": "1.17.178.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GameControllerServiceClient/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Nefarius.ViGEm.Client/1.17.178": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EL5h22+Z9NU38bkphADpQy5QZvCZ+aD0ucg+6rpVY3ypg7Z9YH4VQGiStQVj9kAj7NFlO9WctpY9DyS3/aOB2w==",
+      "path": "nefarius.vigem.client/1.17.178",
+      "hashPath": "nefarius.vigem.client.1.17.178.nupkg.sha512"
+    }
+  }
+}

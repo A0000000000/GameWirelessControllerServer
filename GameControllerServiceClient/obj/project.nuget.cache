@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "FA6HsLACSqfCTzYCp58aOGQYmE6Z9qryzwq9KJt/lE3ad9Cf6uhyJg3Gxh6PIMgfoMnjESDm091XNYDogjI0+g==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mengx\\.nuget\\packages\\nefarius.vigem.client\\1.17.178\\nefarius.vigem.client.1.17.178.nupkg.sha512"
+  ],
+  "logs": []
+}

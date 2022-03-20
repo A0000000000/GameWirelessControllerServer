@@ -2,33 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using GameControllerServiceClient;
 
 namespace GameWirelessControllerServer
 {
     public class TransferObject
     {
-        public static TransferObject FromJson(string json)
+        public static readonly int TYPE_GAME_EVENT = 0;
+        public static readonly int TYPE_JOYSTICK_EVENT = 1;
+
+        public GameEvent GameEvent
         {
-            return JsonSerializer.Deserialize<TransferObject>(json);
+            get;
+            set;
         }
-
-        public string ToJson()
-        {
-            return JsonSerializer.Serialize(this);
-        }
-
-        public TransferObject(Dictionary<string, object> data, int type, string message)
-        {
-            this.Data = data;
-            this.Type = type;
-            this.Message = message;
-        }
-
-
-        public Dictionary<string, object> Data
+        public JoystickEvent JoystickEvent
         {
             get;
             set;
@@ -39,26 +29,19 @@ namespace GameWirelessControllerServer
             get;
             set;
         }
-
         public string Message
         {
             get;
             set;
         }
 
-
-        public override string ToString()
+        public static TransferObject CreateJoystickEvent(JoystickEvent joystickEvent)
         {
-            if (Type != 0 || Data == null)
+            return new TransferObject()
             {
-                return Message;
-            }
-            StringBuilder sb = new StringBuilder();
-            foreach(KeyValuePair<string, object> kv in Data)
-            {
-                sb.Append($"{kv.Key} : {kv.Value}\n");
-            }
-            return sb.ToString();
+                Type = TYPE_JOYSTICK_EVENT,
+                JoystickEvent = joystickEvent
+            };
         }
 
     }

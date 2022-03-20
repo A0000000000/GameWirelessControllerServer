@@ -1,0 +1,12 @@
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Release\net5.0\GameControllerServiceClient.deps.json
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Release\net5.0\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Release\net5.0\ref\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\bin\Release\net5.0\GameControllerServiceClient.pdb
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.csproj.AssemblyReference.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.AssemblyInfoInputs.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.AssemblyInfo.cs
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.csproj.CoreCompileInputs.cache
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\ref\GameControllerServiceClient.dll
+D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Release\net5.0\GameControllerServiceClient.pdb

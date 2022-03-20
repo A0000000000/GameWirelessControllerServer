@@ -1,7 +1,6 @@
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.exe.config
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.exe
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\GameWirelessControllerServer.pdb
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\InTheHand.Net.Bluetooth.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.FormMain.resources
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.Properties.Resources.resources
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\obj\Debug\GameWirelessControllerServer.csproj.GenerateResource.cache
@@ -15,7 +14,6 @@ D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\S
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Numerics.Vectors.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Encodings.Web.xml
-D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Text.Json.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.ValueTuple.xml
 D:\Project\GameWirelessControllerServer\GameWirelessControllerServer\bin\Debug\System.Diagnostics.DiagnosticSource.xml
