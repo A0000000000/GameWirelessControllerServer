@@ -495,11 +495,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
+      "projectUniqueName": "D:\\joystick\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
       "projectName": "ConnectionServiceServer",
-      "projectPath": "D:\\Project\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
+      "projectPath": "D:\\joystick\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
       "packagesPath": "C:\\Users\\mengx\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\GameWirelessControllerServer\\ConnectionServiceServer\\obj\\",
+      "outputPath": "D:\\joystick\\GameWirelessControllerServer\\ConnectionServiceServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Software\\Visual Studio Shared\\NuGetPackages"

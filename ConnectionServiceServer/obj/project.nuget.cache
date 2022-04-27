@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T7a433mni1gkcdPNCFne+Yov5HsJGBWQas9ryl6WvL49zJbJgUWNv5MaOrruzlbmDroey5BSNbd9JKJ2X3pQig==",
+  "dgSpecHash": "fU1JcpPrdHp79FetD1szUlCB+C8j4H192EeAhTNlK0sgDbswbmQE/DPQmgb1MKSPJhAFfemlykLsBE0/YrHDaQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
+  "projectFilePath": "D:\\joystick\\GameWirelessControllerServer\\ConnectionServiceServer\\ConnectionServiceServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mengx\\.nuget\\packages\\inthehand.net.bluetooth\\4.0.27\\inthehand.net.bluetooth.4.0.27.nupkg.sha512",
     "C:\\Users\\mengx\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

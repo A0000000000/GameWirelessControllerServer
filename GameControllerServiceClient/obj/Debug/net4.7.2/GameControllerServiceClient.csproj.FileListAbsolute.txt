@@ -9,3 +9,14 @@ D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\ne
 D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.CopyComplete
 D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.dll
 D:\Project\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.pdb
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\GameControllerServiceClient.dll
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\GameControllerServiceClient.pdb
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\bin\Debug\net4.7.2\Nefarius.ViGEm.Client.dll
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.AssemblyReference.cache
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.AssemblyInfoInputs.cache
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.AssemblyInfo.cs
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.CoreCompileInputs.cache
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.csproj.CopyComplete
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.dll
+D:\joystick\GameWirelessControllerServer\GameControllerServiceClient\obj\Debug\net4.7.2\GameControllerServiceClient.pdb

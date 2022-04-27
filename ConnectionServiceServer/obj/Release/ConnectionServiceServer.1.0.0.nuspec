@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ConnectionServiceServer</id>
+    <version>1.0.0</version>
+    <authors>ConnectionServiceServer</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="InTheHand.Net.Bluetooth" version="4.0.27" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="6.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\joystick\GameWirelessControllerServer\ConnectionServiceServer\bin\Release\net4.7.2\ConnectionServiceServer.dll" target="lib\net472\ConnectionServiceServer.dll" />
+  </files>
+</package>

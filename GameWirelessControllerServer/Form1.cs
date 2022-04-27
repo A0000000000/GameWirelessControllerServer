@@ -14,6 +14,7 @@ namespace GameWirelessControllerServer
     {
 
         private GameWirelessController Controller;
+        private bool flag = true;
         
         public FormMain()
         {
@@ -21,8 +22,7 @@ namespace GameWirelessControllerServer
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
-            Controller = new GameWirelessController();
-            Controller.Init();
+            button2.Enabled = false;
         }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -31,9 +31,34 @@ namespace GameWirelessControllerServer
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Controller.Dispose();
+            Controller?.Dispose();
             Application.Exit();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (flag)
+            {
+                label2.Text = "已启动";
+                Controller = new GameWirelessController();
+                Controller.Init();
+                flag = false;
+                button1.Enabled = false;
+                button2.Enabled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!flag)
+            {
+                label2.Text = "未启动";
+                Controller?.Dispose();
+                Controller = null;
+                flag = true;
+                button2.Enabled = false;
+                button1.Enabled = true;
+            }
+        }
     }
 }

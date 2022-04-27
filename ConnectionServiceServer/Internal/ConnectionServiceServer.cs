@@ -11,7 +11,6 @@ namespace ConnectionServiceServer.Internal
 {
     public class ConnectionServiceServer: IDisposable
     {
-
         public Guid Guid
         {
             get;

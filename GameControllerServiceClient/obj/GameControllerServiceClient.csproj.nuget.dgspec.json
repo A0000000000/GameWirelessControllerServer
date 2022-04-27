@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj": {}
+    "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj": {}
   },
   "projects": {
-    "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj": {
+    "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
+        "projectUniqueName": "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
         "projectName": "GameControllerServiceClient",
-        "projectPath": "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
+        "projectPath": "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
         "packagesPath": "C:\\Users\\mengx\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\obj\\",
+        "outputPath": "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Software\\Visual Studio Shared\\NuGetPackages"

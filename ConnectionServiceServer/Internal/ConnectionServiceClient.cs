@@ -34,22 +34,37 @@ namespace ConnectionServiceServer.Internal
             {
                 while (true)
                 {
-                    byte[] length = new byte[4];
-                    stream.Read(length, 0, length.Length);
-                    int size = ByteLengthUtils.GetLengthInteger(length);
-                    if (size == 0)
+                    try
+                    {
+                        byte[] length = new byte[4];
+                        stream.Read(length, 0, length.Length);
+                        int size = ByteLengthUtils.GetLengthInteger(length);
+                        if (size == 0)
+                        {
+                            if (OnDisconnect != null)
+                            {
+                                OnDisconnect();
+                            }
+                            break;
+                        }
+                        if (size > 10240)
+                        {
+                            throw new Exception("Size too big");
+                        }
+                        byte[] data = new byte[size];
+                        stream.Read(data, 0, data.Length);
+                        if (onDataRead != null)
+                        {
+                            onDataRead(data);
+                        }
+                    }
+                    catch (Exception e)
                     {
                         if (OnDisconnect != null)
                         {
                             OnDisconnect();
                         }
                         break;
-                    }
-                    byte[] data = new byte[size];
-                    stream.Read(data, 0, data.Length);
-                    if (onDataRead != null)
-                    {
-                        onDataRead(data);
                     }
                 }
             });

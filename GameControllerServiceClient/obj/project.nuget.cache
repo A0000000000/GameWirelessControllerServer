@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FA6HsLACSqfCTzYCp58aOGQYmE6Z9qryzwq9KJt/lE3ad9Cf6uhyJg3Gxh6PIMgfoMnjESDm091XNYDogjI0+g==",
+  "dgSpecHash": "yCGkH04sR+Xl8J+Si8KhgDnb4dM04x4PKm8litdTJ4vnww+nNDIWxwBn2LtTf5GVifZHWf3VahyzEsQL2ZmrZQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
+  "projectFilePath": "D:\\joystick\\GameWirelessControllerServer\\GameControllerServiceClient\\GameControllerServiceClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mengx\\.nuget\\packages\\nefarius.vigem.client\\1.17.178\\nefarius.vigem.client.1.17.178.nupkg.sha512"
   ],
