@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using InTheHand.Net.Sockets;
 
 
-namespace ConnectionServiceServer.Internal
+namespace ConnectionServiceServer.Raw
 {
     public class ConnectionServiceServer: IDisposable
     {
@@ -37,10 +37,18 @@ namespace ConnectionServiceServer.Internal
             listenerThread = new Thread(() => {
                 while (true)
                 {
-                    BluetoothClient client = BluetoothListener.AcceptBluetoothClient();
-                    if (onClientConnected != null)
+                    try
                     {
-                        onClientConnected(new ConnectionServiceClient(client));
+                        BluetoothClient client = BluetoothListener.AcceptBluetoothClient();
+                        if (onClientConnected != null)
+                        {
+                            onClientConnected(new ConnectionServiceClient(client));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        break;
                     }
                 }
             });
@@ -49,7 +57,6 @@ namespace ConnectionServiceServer.Internal
 
         public void Dispose()
         {
-            listenerThread.Abort();
             BluetoothListener.Dispose();
         }
 

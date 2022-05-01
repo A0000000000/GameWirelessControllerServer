@@ -46,6 +46,11 @@ namespace GameControllerServiceClient
 
         public void SendControllerEvent(GameEvent ev)
         {
+            if (ev == null)
+            {
+                Console.WriteLine("ev == null !!!!!");
+                return;
+            }
             switch (ev.EventType)
             {
                 case Xbox360Type.KEY:

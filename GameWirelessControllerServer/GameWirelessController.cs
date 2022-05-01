@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using ConnectionServiceServer;
-using ConnectionServiceServer.Internal;
-using GameControllerServiceClient;
 
 namespace GameWirelessControllerServer
 {
-    using ConnectionServiceServer = ConnectionServiceServer.Internal.ConnectionServiceServer;
 
     public class GameWirelessController: IDisposable
     {
@@ -34,59 +30,50 @@ namespace GameWirelessControllerServer
         {
             get;
             set;
-        } = Joystick.TYPE_XBOX360;
+        } = GameControllerServiceClient.Joystick.TYPE_XBOX360;
 
-        private ConnectionServiceController mConnectionServiceController;
-        private ConnectionServiceServer mConnectionServiceServer;
-        private JoystickController mJoystickController;
+        private ConnectionServiceServer.Raw.ConnectionServiceController mConnectionServiceController;
+        private ConnectionServiceServer.Raw.ConnectionServiceServer mConnectionServiceServer;
+        private GameControllerServiceClient.JoystickController mJoystickController;
 
         public GameWirelessController()
         {
-            mConnectionServiceController = ConnectionServiceController.Instance;
+            mConnectionServiceController = ConnectionServiceServer.Raw.ConnectionServiceController.Instance;
             mConnectionServiceServer = mConnectionServiceController.GetConnectionServiceServer(Guid);
-            mJoystickController = JoystickController.Instance;
+            mJoystickController = GameControllerServiceClient.JoystickController.Instance;
         }
-
-
 
         public void Init()
         {
             mConnectionServiceServer.Init(client =>
             {
-                ConnectionServiceClientDecorator<TransferObject> conn = new ConnectionServiceClientDecorator<TransferObject>(client);
-                OnClientConnection(conn);
+                OnClientConnection(client);
             });
         }
 
-        public void OnClientConnection(ConnectionServiceClientDecorator<TransferObject> conn)
+        public void OnClientConnection(ConnectionServiceServer.Raw.ConnectionServiceClient conn)
         {
-            Joystick joystick = mJoystickController.GetJoystick(Id, Type);
+            GameControllerServiceClient.Joystick joystick = mJoystickController.GetJoystick(Id, Type);
             Action action = () =>
             {
+                joystick.Dispose();
                 conn.Dispose();
             };
             Clients.Add(action);
-            conn.OnDisconnect = () =>
-            {
-                Clients.Remove(action);
-                joystick.Dispose();
-            };
             joystick.Init();
             joystick.Xbox360FeedbackReceived = (largeMotor, smallMotor, ledNumber) =>
             {
-                JoystickEvent joystickEvent = new JoystickEvent(largeMotor, smallMotor, ledNumber);
-                conn.Write(TransferObject.CreateJoystickEvent(joystickEvent));
+                JoystickEvent ev = new JoystickEvent(largeMotor, smallMotor, ledNumber);
+                conn.Write(Encoding.UTF8.GetBytes(ConnectionServiceServer.Utils.JsonUtils<JoystickEvent>.ToJson(ev)));
             };
-            conn.OnNameReady = () =>
+            conn.Init(data =>
             {
-                joystick.Id = conn.Name;
-            };
-            conn.Init(obj =>
+                GameControllerServiceClient.GameEvent ev = ConnectionServiceServer.Utils.JsonUtils<GameControllerServiceClient.GameEvent>.FromJson(Encoding.UTF8.GetString(data));
+                joystick.SendControllerEvent(ev);
+            }, e =>
             {
-                if (obj != null && obj.Type == TransferObject.TYPE_GAME_EVENT && obj.GameEvent != null)
-                {
-                    joystick.SendControllerEvent(obj.GameEvent);
-                }
+                joystick.Dispose();
+                conn.Dispose();
             });
         }
 
